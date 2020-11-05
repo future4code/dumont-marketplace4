@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {TextField, Button, InputLabel, Select, FormControl} from '@material-ui/core/';
 import styled from 'styled-components'
 import StorefrontIcon from '@material-ui/icons/Storefront';
+import axios from 'axios'
 
 
 const MainDiv = styled.div`
@@ -15,7 +16,6 @@ const MainDiv = styled.div`
         width:100vw ;
     }
 `
-
 const Input = styled(TextField)`
     width: ${props=> props.tamanho};
     word-wrap: break-word;  
@@ -46,19 +46,48 @@ const Title = styled.h1`
 
 class PostProduto extends Component {
     state = { 
+        valorNome: '',
+        valorUrl:'',
+        valorDescricao: '',
+        valorEstoque: '',
+        valorPreco: '',
+        valorFormaPg:'',
+        valorCategoria:''
+     }
 
+     postarProduto = ()=>{
+        const urlPost = 'https://us-central1-labenu-apis.cloudfunctions.net/fourUsedTwo/products'
+        const body = {
+            name: this.state.valorNome,
+            description: this.state.valorDescricao,
+            price: this.state.valorPreco,
+            paymentMethod: this.state.valorFormaPg,
+            category: this.state.valorCategoria,
+            photos: [this.state.valorUrl],
+            installments:this.state.valorEstoque
+        }
+        axios.post(urlPost, body).then(response=>{
+            alert('Seu produto ja esta disponivel na nossa vitrine!')
+        }).catch(error=>{
+            console.log(error.message)
+        })
      }
     
     render() { 
+       
         return ( 
             <MainDiv>
-                
-               
-                <Title> <StorefrontIcon fontSize='inherit' color='secondary'/> Vender Produto</Title>
-               
+
+                <Title> 
+                    <StorefrontIcon fontSize='inherit' color='secondary'/>
+                     Vender Produto
+                </Title>
+
                 <InputDiv tamanho='80%'>
                      <Input 
-                        id="outlined-basic" 
+                        id="outlined-basic"
+                        value={this.state.valorNome} 
+                        onChange={event=> this.setState({valorNome: event.target.value})}
                         tamanho='100%'
                         label="Nome do Produto" 
                         variant="outlined" />
@@ -67,6 +96,8 @@ class PostProduto extends Component {
                 <InputDiv tamanho='80%'>
                      <Input 
                      id="outlined-basic" 
+                     value={this.state.valorUrl} 
+                     onChange={event=> this.setState({valorUrl: event.target.value})}
                      tamanho='100%' 
                      label="Url da Imagem" 
                      variant="outlined" />
@@ -74,7 +105,9 @@ class PostProduto extends Component {
 
                 <InputDiv tamanho='80%'>
                      <Input 
-                      id="outlined-basic"  
+                      id="outlined-basic" 
+                      value={this.state.valorDescricao} 
+                      onChange={event=> this.setState({valorDescricao: event.target.value})} 
                       tamanho='100%'
                       label="Descricao" 
                       variant="outlined" />
@@ -84,6 +117,8 @@ class PostProduto extends Component {
                     <InputDiv tamanho='25%'>
                         <Input 
                          id="outlined-basic"  
+                         value={this.state.valorEstoque} 
+                         onChange={event=> this.setState({valorEstoque: event.target.value})}
                          tamanho='100%' 
                          type='number' 
                          label="Estoque" 
@@ -92,6 +127,8 @@ class PostProduto extends Component {
                     <InputDiv tamanho='25%'>
                         <Input 
                          id="outlined-basic" 
+                         value={this.state.valorPreco} 
+                         onChange={event=> this.setState({valorPreco: event.target.value})}
                          color='secondary' 
                          type='number'
                          tamanho='100%'
@@ -100,7 +137,9 @@ class PostProduto extends Component {
                     </InputDiv>
                     <InputDiv tamanho='55%'>
                         <Input 
-                         id="outlined-basic"  
+                         id="outlined-basic" 
+                         value={this.state.valorFormaPg} 
+                         onChange={event=> this.setState({valorFormaPg: event.target.value})} 
                          tamanho='100%'
                          label="Forma de Pag." 
                          variant="outlined" />
@@ -112,10 +151,10 @@ class PostProduto extends Component {
                             <InputLabel htmlFor="outlined-age-native-simple">Categoria</InputLabel>
                             <Select
                             native
-                            // value={state.age}
-                            // onChange={handleChange}
-                            label="Categoria"
-                            >
+                            value={this.state.valorCategoria} 
+                            onChange={event=> this.setState({valorCategoria: event.target.value})}
+                            label="Categoria">
+            
                             <option aria-label="None" value="" />
                             <option value={'roupas'}>Roupas</option>
                             <option value={'eletronicos'}>Eletronicos</option>
@@ -127,8 +166,8 @@ class PostProduto extends Component {
                 </InputDiv>
 
                 <ButtonDiv>
-                        <Button color="primary">Voltar</Button>
-                        <Button variant="contained" color="primary">Vender Produto</Button>
+                        <Button onClick={this.props.botaoVoltar} color="primary">Voltar</Button>
+                        <Button  onClick={this.postarProduto} variant="contained" color="primary">Vender Produto</Button>
                 </ButtonDiv>
             </MainDiv>
     
