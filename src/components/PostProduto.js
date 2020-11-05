@@ -42,6 +42,9 @@ const Title = styled.h1`
         margin-left: 50px;
     }
 `
+const Form = styled(FormControl)`
+    width: 100%;
+`
 
 
 class PostProduto extends Component {
@@ -68,6 +71,15 @@ class PostProduto extends Component {
         }
         axios.post(urlPost, body).then(response=>{
             alert('Seu produto ja esta disponivel na nossa vitrine!')
+            this.setState({
+                valorNome: '',
+                valorUrl:'',
+                valorDescricao: '',
+                valorEstoque: '',
+                valorPreco: '',
+                valorFormaPg:'',
+                valorCategoria:''
+            })
         }).catch(error=>{
             console.log(error.message)
         })
@@ -136,6 +148,24 @@ class PostProduto extends Component {
                          variant="outlined" />
                     </InputDiv>
                     <InputDiv tamanho='55%'>
+                    
+                    <Form variant="outlined" >
+                            <InputLabel htmlFor="outlined-age-native-simple">Forma de Pag.</InputLabel>
+                            <Select
+                            native
+                            value={this.state.valorFormaPg} 
+                            onChange={event=> this.setState({valorFormaPg: event.target.value})}
+                            label="Categoria">
+            
+                            <option aria-label="None" value="" />
+                            <option value={'boleto'}>Boleto</option>
+                            <option value={'cartao'}>Cartao</option>
+                            <option value={'dinheiro'}>Dinheiro</option>
+                           
+                            </Select>
+                        </Form>
+                    </InputDiv>
+                    {/* <InputDiv tamanho='55%'>
                         <Input 
                          id="outlined-basic" 
                          value={this.state.valorFormaPg} 
@@ -143,7 +173,7 @@ class PostProduto extends Component {
                          tamanho='100%'
                          label="Forma de Pag." 
                          variant="outlined" />
-                    </InputDiv>
+                    </InputDiv> */}
                 </InputDiv>
                 <InputDiv tamanho='80%'>
                 
