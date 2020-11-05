@@ -68,6 +68,15 @@ class PostProduto extends Component {
         }
         axios.post(urlPost, body).then(response=>{
             alert('Seu produto ja esta disponivel na nossa vitrine!')
+            this.setState({
+                valorNome: '',
+                valorUrl:'',
+                valorDescricao: '',
+                valorEstoque: '',
+                valorPreco: '',
+                valorFormaPg:'',
+                valorCategoria:''
+            })
         }).catch(error=>{
             console.log(error.message)
         })
