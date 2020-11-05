@@ -10,6 +10,7 @@ const Card = styled.div`
     box-shadow: 0px 15px 15px rgba(0,0,0,0.2);
     display: flex;
     margin: 20px;
+    background-color: #F8FAFF;
 `
 const DivImagem = styled.div`
     height: max-content;
