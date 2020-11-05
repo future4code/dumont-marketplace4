@@ -8,7 +8,7 @@ const MainContainer = styled.div `
     border: solid 1px;
     margin: 20px;
     padding: 20px;
-    width: 55vw;
+    width: 95%;
     height: 80vh;
     display: flex;
     flex-direction: column;
