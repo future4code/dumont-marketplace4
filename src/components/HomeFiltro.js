@@ -136,7 +136,7 @@ class HomeFiltro extends Component {
                 })
                 const itemCarrinho = {
                     ...produto,
-                    quantidade: 0
+                    quantidade: 1
                 }
                 
                 novoItemsCarrinho = [...itemsCarrinho, itemCarrinho]
@@ -148,7 +148,7 @@ class HomeFiltro extends Component {
             })
             const itemCarrinho = {
                 ...produto,
-                quantidade: 0
+                quantidade: 1
             }
             const novoItemsCarrinho = [itemCarrinho]
             localStorage.setItem('itemsCarrinho', JSON.stringify(novoItemsCarrinho))
@@ -156,7 +156,7 @@ class HomeFiltro extends Component {
     }
 
     render() { 
-       // console.log(JSON.parse(localStorage.getItem('itemsCarrinho')))
+       console.log(JSON.parse(localStorage.getItem('itemsCarrinho')))
         
         return (  
             <MainDiv>
