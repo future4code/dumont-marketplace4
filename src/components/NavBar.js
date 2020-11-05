@@ -10,17 +10,29 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Logo from '../img/logo.png';
 import styled from 'styled-components';
 
+
 const Img = styled.img`
 max-width: 50px;
-border-radius: 20px; 
+border-radius: 3px; 
+margin-left: 30px;
 `;
 
 const useStyles = makeStyles((theme) => ({
+
+  button: {
+    backgroundColor: '#41A69C',
+    margin: '20px'
+  },
+
+  buttons: {
+    marginRight:'40px',
+  },
+
     root: {
       background: '#F2C063',
-      flexGrow: 1,
-      
+      flexGrow: 1, 
     },
+
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -29,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
       [theme.breakpoints.up('sm')]: {
         display: 'block',
-        marginLeft:'2%',
+        marginLeft:'1%',
       },
     },
     search: {
@@ -57,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
     },
     inputRoot: {
       color: 'inherit',
+      marginRight:'10vw',
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
@@ -90,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search…"
+                placeholder="Busca"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
@@ -99,17 +112,17 @@ const useStyles = makeStyles((theme) => ({
               />
             </div>
 
-            <div className={classes.root}>
+            <div className={classes.buttons}>
 
-            <Button variant="outlined" color="primary">
+            <Button variant="outlined" >
               Como funciona
             </Button>
 
-            <Button variant="contained" color="primary">      
+            <Button variant="contained" className={classes.button}>      
               Vender agora!
             </Button>
             </div>
-            <AddShoppingCartIcon/>
+            <Button><AddShoppingCartIcon className={classes.buttons}/></Button>
 
           </Toolbar>
         </AppBar>
