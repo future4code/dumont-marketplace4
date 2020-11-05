@@ -27,10 +27,12 @@ const useStyles = makeStyles((theme) => ({
   buttons: {
     marginRight:'40px',
   },
-
+    //
     root: {
       background: '#F2C063',
-      flexGrow: 1, 
+      flexGrow: 1,
+      width:"100vw", 
+
     },
 
     menuButton: {
@@ -51,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
       '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),
       },
-      marginRight:'40px',
+      marginRight:'5%',
       width: '100%',
       [theme.breakpoints.up('sm')]: {
         
