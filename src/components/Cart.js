@@ -9,6 +9,10 @@ const MainContainer = styled.div `
     margin: 20px;
     padding: 20px;
     width: 55vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `
 const TitleLine = styled.div `
     display:flex;
@@ -47,7 +51,7 @@ export class Cart extends Component {
             </div>
             
             <Total>
-                Valor Total: R$300
+                Valor Total: R${this.props.total || '0,00'}
             </Total>
             
         </MainContainer>
