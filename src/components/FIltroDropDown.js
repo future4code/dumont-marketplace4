@@ -10,7 +10,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import { green, purple } from '@material-ui/core/colors';
 
-const ButtonLimpar = withStyles({
+const ButtonFilter = withStyles({
   root: {
     color:'white',
     width: '22ch',
@@ -164,7 +164,7 @@ function FiltroDropDown (){
         </form>
 
         <form className={classes4.root} noValidate autoComplete="off">
-            <ButtonLimpar variant="outlined" color="primary">Limpar</ButtonLimpar>
+            <ButtonFilter variant="outlined" color="primary">Aplicar filtro</ButtonFilter>
         </form>
     </Div>
     

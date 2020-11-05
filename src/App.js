@@ -5,8 +5,8 @@ import FiltroDropDown from './components/FIltroDropDown'
 function App() {
 	return (
 		<div>
-         <AppContainer />
-		<CartItem /> 
+         {/* <AppContainer />
+		<CartItem />  */}
 		<FiltroDropDown/>
 
 		</div>
