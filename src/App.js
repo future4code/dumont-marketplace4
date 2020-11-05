@@ -6,9 +6,7 @@ import { CartItem } from './components/CartItem'
 function App() {
 	return (
 		<div>
-		<NavBar />	
-        <AppContainer />
-		<CartItem />
+
 		</div>
 
 	)
