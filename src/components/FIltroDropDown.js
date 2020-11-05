@@ -10,7 +10,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import { green, purple } from '@material-ui/core/colors';
 
-const ButtonFilter = withStyles({
+const ButtonLimpar = withStyles({
   root: {
     color:'white',
     width: '22ch',
