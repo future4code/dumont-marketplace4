@@ -6,11 +6,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import RemoveIcon from '@material-ui/icons/Remove';
 
 const ItemContainer = styled.div `
-margin: 20px;
+margin-bottom: 20px;
 border: solid 1px;
 display:flex;
 flex-direction: row;
-width:50vw;
+align-items: center;
+/* width:50vw; */
 `
 const MainContainer = styled.div `
 display:flex;
@@ -33,6 +34,8 @@ flex-direction: row;
 justify-content: space-between;
 `
 const ProductImage = styled.img `
+max-width: width auto;
+max-height:33vh;
 `
 const ProductName = styled.h2 `
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
@@ -60,22 +63,22 @@ export class CartItem extends Component {
     render() {
       return (
         <ItemContainer>
-            <ProductImage src="https://picsum.photos/300/200" alt=""/>
+            <ProductImage src={this.props.imgUrl} alt=""/>
             <MainContainer>
                 <ProductLine>
-                    <ProductName>Produto</ProductName>
+                    <ProductName>{this.props.productName}</ProductName>
                     <RemoveButton color="secondary" aria-label="add"><DeleteIcon/></RemoveButton>
                 </ProductLine>
-                    <ProductDescr>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</ProductDescr>
+                    <ProductDescr>{this.props.description}</ProductDescr>
                 <QuantityValueContainer>
                     <QuantityContainer>
                         <MinusButton color="primary" aria-label="add"><RemoveIcon/></MinusButton>
-                        <Quantity>2</Quantity>
+                        <Quantity>{this.props.quantity}</Quantity>
                         <PlusButton color="primary" aria-label="add"><AddIcon/></PlusButton>
 
                     </QuantityContainer>
                     <div>
-                        <UnitPrice>Valor: R$100</UnitPrice>
+                        <UnitPrice>Valor: R${this.props.price}</UnitPrice>
                     </div>
                 </QuantityValueContainer>
             </MainContainer>

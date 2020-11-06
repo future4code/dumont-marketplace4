@@ -77,7 +77,12 @@ export class Cart extends Component {
         alert('Compra Finalizada! Volte Sempre!')
     }
     render() {
-       // console.log(this.state.itemsCarrinho)
+       console.log(this.state.itemsCarrinho)
+       let total = this.state.itemsCarrinho.reduce(getTotal, 0);
+       function getTotal(total, item) {
+       return total + (item[0].price * item.quantidade);
+       }
+
       return (
           <MainDiv>
               <NavBar 
@@ -96,12 +101,17 @@ export class Cart extends Component {
                         </TitleLine>
 
                         {this.state.itemsCarrinho && this.state.itemsCarrinho.map(item=>{
-                            return <CartItem/>
+                            return <CartItem
+                            imgUrl={item[0].photos}
+                            productName={item[0].name}
+                            price={item[0].price}
+                            description={item[0].description}
+                            quantity={item.quantidade}/>
                         })}
 
 
                         <Total>
-                            Valor Total: R${this.props.total || '0,00'}
+                            Valor Total: R${total}
                         </Total>
 
                         <ButtonDiv>
