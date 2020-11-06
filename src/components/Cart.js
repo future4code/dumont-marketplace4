@@ -76,8 +76,40 @@ export class Cart extends Component {
         this.setState({itemsCarrinho: []})
         alert('Compra Finalizada! Volte Sempre!')
     }
+
+    addQuantity = (id) => {
+        console.log(id)
+        const addItem = this.state.itemsCarrinho.map((item) => {
+            if (id === item[0].id) {
+                const newItem = {
+                    ...item,
+                    quantidade: item.quantidade + 1
+                }
+                return newItem
+            }
+            return item
+        })
+        this.setState({itemsCarrinho: addItem})
+    }
+
+    removeQuantity = (id) => {
+    console.log(id)
+    const addItem = this.state.itemsCarrinho.map((item) => {
+        if (id === item[0].id) {
+            const newItem = {
+                ...item,
+                quantidade: item.quantidade - 1
+            }
+            return newItem
+        }
+        return item
+    })
+    this.setState({itemsCarrinho: addItem})
+    }
+    
     render() {
        console.log(this.state.itemsCarrinho)
+       
        let total = this.state.itemsCarrinho.reduce(getTotal, 0);
        function getTotal(total, item) {
        return total + (item[0].price * item.quantidade);
@@ -102,6 +134,8 @@ export class Cart extends Component {
 
                         {this.state.itemsCarrinho && this.state.itemsCarrinho.map(item=>{
                             return <CartItem
+                            addQuantity={() => this.addQuantity(item[0].id)}
+                            removeQuantity={() => this.removeQuantity(item[0].id)}
                             imgUrl={item[0].photos}
                             productName={item[0].name}
                             price={item[0].price}

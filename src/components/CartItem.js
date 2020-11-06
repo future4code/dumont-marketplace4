@@ -60,6 +60,15 @@ const UnitPrice = styled.h3 `
 
 
 export class CartItem extends Component {
+
+    sendMinusId = (id) => {
+        this.props.removeQuantity(id)
+    }
+
+    sendPlusId = (id) => {
+        this.props.addQuantity(id)
+    }
+
     render() {
       return (
         <ItemContainer>
@@ -72,9 +81,17 @@ export class CartItem extends Component {
                     <ProductDescr>{this.props.description}</ProductDescr>
                 <QuantityValueContainer>
                     <QuantityContainer>
-                        <MinusButton color="primary" aria-label="add"><RemoveIcon/></MinusButton>
+                        <MinusButton 
+                            color="primary"
+                            aria-label="add"
+                            onClick={this.sendMinusId}
+                        ><RemoveIcon/></MinusButton>
                         <Quantity>{this.props.quantity}</Quantity>
-                        <PlusButton color="primary" aria-label="add"><AddIcon/></PlusButton>
+                        <PlusButton
+                            color="primary"
+                            aria-label="add"
+                            onClick={this.sendPlusId}
+                        ><AddIcon/></PlusButton>
 
                     </QuantityContainer>
                     <div>
