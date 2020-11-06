@@ -5,6 +5,7 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 import axios from 'axios'
 import NavBar from './NavBar'
 
+
 const MainDiv = styled.div`
     display: flex;
     flex-direction: column;
