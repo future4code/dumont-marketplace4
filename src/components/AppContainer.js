@@ -1,32 +1,36 @@
 import React, { Component } from 'react'
-import CardProduto from './CardProduto'
 import PostProduto from './PostProduto'
 import HomeFiltro from './HomeFiltro'
-import CustomSlider from './CustomSlide'
+import {Cart} from './Cart'
 
 export class AppContainer extends Component {
 
   state = {
-     maisInfo: false
+     home: true,
+     carrinho: false,
+     vender: false,
   }
   render() {
-
+    console.log(this.state)
     return (
       <div>
-        <CustomSlider />
-        <HomeFiltro/>
-        
-       {/* <PostProduto></PostProduto> */}
-       {/* <CardProduto
-        imagem='https://sc01.alicdn.com/kf/HTB1_gQhdf6H8KJjy0Fjq6yXepXaM.jpg_350x350.jpg'
-        preco='100'
-        descricao='testando card testando card testando card testando card'
-        nome='produto'
-        formaPg='cartao'
-        parcelas='Ate 3x'
-        maisInfo={this.state.maisInfo}
-        onClickImagem={()=>{this.setState({maisInfo: !this.state.maisInfo})}}
-        /> */}
+
+          {this.state.home && <HomeFiltro 
+            onClickVender={()=>this.setState({home: false, carrinho: false, vender: true,})}
+            onClickCarrinho={()=>this.setState({home: false, carrinho: true, vender: false,})}
+            />}
+          {this.state.vender && <PostProduto 
+            onClickVender={()=>this.setState({home: false, carrinho: false, vender: true,})}
+            onClickCarrinho={()=>this.setState({home: false, carrinho: true, vender: false,})}
+            botaoVoltar={()=>this.setState({home: true, carrinho: false, vender: false})}
+            /> 
+            }
+            {this.state.carrinho && <Cart
+            onClickVender={()=>this.setState({home: false, carrinho: false, vender: true,})}
+            onClickCarrinho={()=>this.setState({home: false, carrinho: true, vender: false,})}
+            botaoVoltar={()=>this.setState({home: true, carrinho: false, vender: false})}
+            />}
+
       </div>
     )
   }
