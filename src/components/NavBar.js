@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-  export default function NavBar() {
+  export default function NavBar(props) {
     const classes = useStyles();
     
   
@@ -120,11 +120,14 @@ const useStyles = makeStyles((theme) => ({
               Como funciona
             </Button>
 
-            <Button variant="contained" className={classes.button}>      
+            <Button 
+             variant="contained" 
+             className={classes.button}
+             onClick={props.onClickVender}>      
               Vender agora!
             </Button>
             </div>
-            <Button><AddShoppingCartIcon className={classes.buttons}/></Button>
+            <Button onClick={props.onClickCarrinho}><AddShoppingCartIcon className={classes.buttons}/></Button>
 
           </Toolbar>
         </AppBar>

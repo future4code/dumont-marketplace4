@@ -9,7 +9,7 @@ const Card = styled.div`
     position: relative;
     box-shadow: 0px 15px 15px rgba(0,0,0,0.2);
     display: flex;
-    margin: 20px;
+    margin: 5px;
     background-color: #F8FAFF;
 `
 const DivImagem = styled.div`
