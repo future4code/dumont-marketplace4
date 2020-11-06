@@ -10,7 +10,7 @@ const Card = styled.div`
     box-shadow: 0px 15px 15px rgba(0,0,0,0.2);
     display: flex;
     margin: 5px;
-    background-color: #F8FAFF;
+    background-color:#4D4D59;
 `
 const DivImagem = styled.div`
     height: max-content;
@@ -36,7 +36,7 @@ const DivPrecoSobreposto = styled.div`
     width: 80px;
     text-align: center;
     padding-top: 5px;
-    background-color: white;
+    background-color:white;
     position: absolute;
     bottom: 5px;
     left: 10px;
@@ -54,6 +54,7 @@ const DivDescricao = styled.div`
     justify-content: flex-start;
     width: 400px;
     padding: 10px;
+    color: white;
 `
 const DivButton = styled.div`
     height: max-content;
@@ -75,13 +76,20 @@ const DivInfoLateral = styled.div`
     width: 100px;
     border-radius: 3px;
     border: 1px solid ${props=> props.color};
+    background-color: ${props=> props.color};
+    color: white;
     display: ${props=> props.display === false? 'none': 'flex'};
     align-items: center;
     justify-content: center;
     height: 30px;
     margin: 5px;
 `
-
+const TitleDescription = styled.h3`
+    width: 100%;
+    height: 40px;
+    margin-bottom: -20px;
+    color:white;
+`
 
 class CardProduto extends Component {
     
@@ -99,7 +107,7 @@ class CardProduto extends Component {
 
                 <DivDescricao display={this.props.maisInfo}>
 
-                    <h4>{this.props.nome}</h4>
+                    <TitleDescription>{this.props.nome}</TitleDescription>
                     <p>{this.props.descricao}</p>
 
                     <DivButton>
@@ -116,19 +124,19 @@ class CardProduto extends Component {
             </DivImagem>
                 <DivLateral>
 
-                    <DivInfoLateral color='orange'display={this.props.maisInfo}>
+                    <DivInfoLateral color='#F2C063'display={this.props.maisInfo}>
                        
                         {this.props.preco} R$
                        
                     </DivInfoLateral>
 
-                    <DivInfoLateral color='red' display={this.props.maisInfo}>
+                    <DivInfoLateral color='#F24141' display={this.props.maisInfo}>
                         
                         {this.props.formaPg}
                        
                     </DivInfoLateral>
 
-                    <DivInfoLateral color='blue' display={this.props.maisInfo}> 
+                    <DivInfoLateral color='#41A69C' display={this.props.maisInfo}> 
                         
                         {this.props.parcelas}
                         
