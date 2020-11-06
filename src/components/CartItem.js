@@ -69,6 +69,10 @@ export class CartItem extends Component {
         this.props.addQuantity(id)
     }
 
+    sendRemoveId = (id) => {
+        this.props.removeItem(id)
+    }
+
     render() {
       return (
         <ItemContainer>
@@ -76,7 +80,11 @@ export class CartItem extends Component {
             <MainContainer>
                 <ProductLine>
                     <ProductName>{this.props.productName}</ProductName>
-                    <RemoveButton color="secondary" aria-label="add"><DeleteIcon/></RemoveButton>
+                    <RemoveButton
+                        color="secondary"
+                        aria-label="add"
+                        onClick={this.sendRemoveId}
+                    ><DeleteIcon/></RemoveButton>
                 </ProductLine>
                     <ProductDescr>{this.props.description}</ProductDescr>
                 <QuantityValueContainer>
