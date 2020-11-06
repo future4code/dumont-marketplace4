@@ -97,6 +97,7 @@ export class Cart extends Component {
     removeQuantity = (id) => {
     console.log(id)
     const addItem = this.state.itemsCarrinho.map((item) => {
+        
         if (id === item[0].id && item.quantidade>1) {
             const newItem = {
                 ...item,
