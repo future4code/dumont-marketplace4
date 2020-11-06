@@ -41,19 +41,6 @@ const ButtonFilter = withStyles({
   },
 })(Button);
 
-
-const useStyles4 = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-}));
-
-const theme = createMuiTheme({
-  palette: {
-    primary: green,
-  },
-});
-
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -124,12 +111,11 @@ const ButtonClose = styled.button `
     }
 `
 
-function FiltroDropDown (){
+function FiltroDropDown (props){
 
     const classes = useStyles();
     const classes2 = useStyles2();
     const classes3 = useStyles3();
-    const classes4 = useStyles4();
     const [value, setValue] = React.useState('ordenacao');
 
     const handleChange = (event) => {
@@ -143,15 +129,15 @@ function FiltroDropDown (){
             Filtros
         </DivTitle>
         
-        <TextField id="outlined-search" label="Nome" type="text" variant="outlined" />
+        <TextField value={props.nome} onChange={props.valorNome}id="outlined-search" label="Nome" type="text" variant="outlined" />
         <form className={classes2.root} noValidate autoComplete="off">
-            <TextField id="outlined-search" label="min." type="number" variant="outlined" />
-            <TextField id="outlined-search" label="max." type="number"  variant="outlined" />
+            <TextField value={props.minimo} onChange={props.valorMin}id="outlined-search" label="min." type="number" variant="outlined" />
+            <TextField value={props.maximo} onChange={props.valorMax}id="outlined-search" label="max." type="number"  variant="outlined" />
         </form>
         <DivSeletor>
             <FormControl component="fieldset">
                 <FormLabel component="legend">Ordenado por:</FormLabel>
-                <RadioGroup aria-label="ordenacao" name="ordenacao" value={value} onChange={handleChange}>
+                <RadioGroup aria-label="ordenacao" name="ordenacao" onChange={props.ordenacao}>
                     <FormControlLabel value="A-Z" control={<Radio />} label="A-Z" />
                     <FormControlLabel value="Maior valor" control={<Radio />} label="Maior valor" />
                     <FormControlLabel value="Menor valor" control={<Radio />} label="Menor valor" />
@@ -160,11 +146,6 @@ function FiltroDropDown (){
         </DivSeletor>
 
         <form className={classes3.root} noValidate autoComplete="off">
-            <Button variant="outlined" color="primary">Limpar</Button>
-        </form>
-
-        <form className={classes4.root} noValidate autoComplete="off">
-            <ButtonFilter variant="outlined" color="primary">Aplicar filtro</ButtonFilter>
         </form>
     </Div>
     
