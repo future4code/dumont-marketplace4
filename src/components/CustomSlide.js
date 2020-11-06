@@ -17,7 +17,7 @@ width:100vw;
 height:600px;
 `
 const MainDiv = styled.div`
-height:max-content;
+height:maX-content;
 width:100vw;
 
 
