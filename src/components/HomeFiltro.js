@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import CardProduto from './CardProduto'
 import NavBar from './NavBar'
 import CustomSlider from './CustomSlide'
+import FiltroDropDown from './FIltroDropDown';
 
 const TabFiltros = styled.ul`
     display: flex;
@@ -71,6 +72,11 @@ class HomeFiltro extends Component {
         todosProdutos: [],
         produtosFiltrados: [],
         valorDoInput:"",
+        valorMin: 0,
+        valorMax: Infinity,
+        valorNome: "",
+        valorOrdenacao: "",
+
      }
 
     componentDidMount = ()=>{
@@ -80,7 +86,7 @@ class HomeFiltro extends Component {
     atualizarCardProdutos = (event) => {
         
         const  novoArrayProdutosfiltrados = this.state.todosProdutos.filter((produto) => {
-            const name = produto.name
+            const name = produto.name.toLowerCase()
             return name.includes(event.target.value)
              })
         
@@ -149,6 +155,19 @@ class HomeFiltro extends Component {
         this.setState({produtosFiltrados: novoArrayProdutos})
     }
 
+        valorMin = (event) => {
+            if (event.target.value) {
+            const novoArrayProdutos = this.state.produtosFiltrados.filter((produto)=>{
+                return produto.price >= event.target.value
+            })
+            this.setState({produtosFiltrados: novoArrayProdutos })
+        } else {
+            this.pegarProdutos()
+        }
+    }
+
+    
+
     adicionarCarrinho = (id)=>{
         if(localStorage.getItem('itemsCarrinho')){
             const itemsCarrinho = JSON.parse(localStorage.getItem('itemsCarrinho'))
@@ -188,9 +207,39 @@ class HomeFiltro extends Component {
             localStorage.setItem('itemsCarrinho', JSON.stringify(novoItemsCarrinho))
         }
     }
+    onChangeOrdem = (event)=>{
+        const visualization = this.state.produtosFiltrados
+        const orderVisualization = visualization.sort((produtoA, produtoB) =>{
+          const order = event.target.value
+            console.log(order)
+          if(order === 'Menor valor'){
+            return produtoA.price - produtoB.price
+          }else if (order === 'Maior valor'){
+            return produtoB.price - produtoA.price
+          }else{
+            if (produtoA.name < produtoB.name){ 
+                return -1;
+            } else if (produtoA.name >produtoB.name){
+                return 1;
+            } 
+            return 0;
+          }
+        });
+        this.setState({produtosFiltrados: orderVisualization})
+      }
     
     render() { 
-        console.log (this.state.valorDoInput)
+        let arrayProdutosFiltadros = this.state.produtosFiltrados.filter((produto)=>{
+            const valorMaximo= this.state.valorMax === ''? Infinity: this.state.valorMax
+              if(produto.price < this.state.valorMin || produto.price > valorMaximo){
+
+                  return false
+
+                } else{
+
+                    return true
+                  }
+                })
         return (  
             <MainDiv>
                 <NavBar 
@@ -199,6 +248,13 @@ class HomeFiltro extends Component {
                 onChangePesquisa={this.atualizarCardProdutos}
                 // valorDoInput= {this.state.valorDoInput}
                 />
+                {/* <FiltroDropDown
+                 valorNome={this.atualizarCardProdutos}
+                 valorMin={event => this.setState({valorMin: event.target.value})}
+                 minimo={this.state.valorMin}
+                 valorMax={event => this.setState({valorMax: event.target.value})}
+                 maximo={this.state.valorMax}
+                 ordenacao={this.onChangeOrdem}/> */}
                 <CustomSlider/>
                 <TabFiltros>
                     <ButtonFiltro>
@@ -224,7 +280,7 @@ class HomeFiltro extends Component {
                     </ButtonFiltro>
                 </TabFiltros>
                 <DivProdutos>
-                    {this.state.produtosFiltrados.map(produto=>{
+                    {arrayProdutosFiltadros.map(produto=>{
                         const resto = produto.price % 50
                         const parcela = (produto.price - resto) / 50
                         
