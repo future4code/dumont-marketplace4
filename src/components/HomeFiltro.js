@@ -81,7 +81,7 @@ class HomeFiltro extends Component {
         const  novoArrayProdutosfiltrados = this.state.todosProdutos.filter((produto) => {
             const name = produto.name
             return name.includes(event.target.value)
-            })
+             })
         
         this.setState ({
             produtosFiltrados: novoArrayProdutosfiltrados,

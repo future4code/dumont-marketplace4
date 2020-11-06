@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
           <Toolbar>
           <Img src={Logo}/>
             <Typography className={classes.title} variant="h6" noWrap>
-            4Used
+              4Used
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
