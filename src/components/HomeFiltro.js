@@ -3,6 +3,7 @@ import axios from 'axios'
 import styled from 'styled-components'
 import CardProduto from './CardProduto'
 import NavBar from './NavBar'
+import CustomSlider from './CustomSlide'
 
 const TabFiltros = styled.ul`
     display: flex;
@@ -182,6 +183,7 @@ class HomeFiltro extends Component {
                 onClickCarrinho={this.props.onClickCarrinho}
                 onClickVender={this.props.onClickVender}
                 />
+                <CustomSlider/>
                 <TabFiltros>
                     <ButtonFiltro>
                         <LinkButton color='#4D4D59' onClick={this.filtroDefault} href="#">
