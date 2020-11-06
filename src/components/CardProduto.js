@@ -28,8 +28,7 @@ const Imagem = styled.img`
     z-index: 1;
     cursor: pointer;
     &:hover{
-        height: 252px;
-        width: 252px;
+        box-shadow: 0px 15px 15px rgba(0,0,0,0.2);
     }
 `
 const DivPrecoSobreposto = styled.div`
