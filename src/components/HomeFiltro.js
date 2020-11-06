@@ -179,8 +179,10 @@ class HomeFiltro extends Component {
                 if(item[0].id === id){
                     item.quantidade ++
                     existe = true
+                    this.showInfoImage(id)
                 }
                 return item
+                
             })
             //se nao adicionamos ele no array Items do Carrinho
             if(!existe){
@@ -191,6 +193,7 @@ class HomeFiltro extends Component {
                     ...produto,
                     quantidade: 1
                 }
+                this.showInfoImage(id)
                 
                 novoItemsCarrinho = [...itemsCarrinho, itemCarrinho]
             }
@@ -203,6 +206,7 @@ class HomeFiltro extends Component {
                 ...produto,
                 quantidade: 1
             }
+            this.showInfoImage(id)
             const novoItemsCarrinho = [itemCarrinho]
             localStorage.setItem('itemsCarrinho', JSON.stringify(novoItemsCarrinho))
         }
