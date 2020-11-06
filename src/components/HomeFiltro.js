@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import styled from 'styled-components'
 import CardProduto from './CardProduto'
+import NavBar from './NavBar'
 
 const TabFiltros = styled.ul`
     display: flex;
@@ -15,8 +16,8 @@ const MainDiv = styled.div`
     flex-direction: column;
     width: 100vw;
     max-height: max-content;
-    min-height: 80vh;
-    margin-top: 100px;
+    min-height: 100vh;
+    
     background-color:#F2EFE4;
 
 `
@@ -26,30 +27,48 @@ const DivProdutos= styled.div`
     justify-content: center;
     flex-flow: row wrap;
     margin: 10px;
-    height: max-content;
+    max-height: max-content;
+    min-height: 80vh;
     width: 100%;
     
 `
 
 const ButtonFiltro = styled.li`
     margin: 20px;
+    height: 30px;
+    width: 80px;
+
 `
 const LinkButton = styled.a`
     text-decoration: none;
     color:grey;
     &:hover{
         font-size: large;
-        color: black;
+        color: ${props=> props.color};
     }
     &:focus{
         font-size: large;
-        color: black; 
+        color: ${props=> props.color}; 
+    }
+`
+const Letra = styled.p`
+    display: inline;
+    color: grey; 
+    letter-spacing: 2px;
+    font-weight: bold;
+    &:hover{
+        
+        color: ${props=> props.color};
+    }
+    &:focus{
+        
+        color: ${props=> props.color}; 
     }
 `
 class HomeFiltro extends Component {
     state = { 
         todosProdutos: [],
-        produtosFiltrados: [] ,
+        produtosFiltrados: [],
      }
 
     componentDidMount = ()=>{
@@ -156,25 +175,34 @@ class HomeFiltro extends Component {
     }
 
     render() { 
-       console.log(JSON.parse(localStorage.getItem('itemsCarrinho')))
         
         return (  
             <MainDiv>
+                <NavBar 
+                onClickCarrinho={this.props.onClickCarrinho}
+                onClickVender={this.props.onClickVender}
+                />
                 <TabFiltros>
                     <ButtonFiltro>
-                        <LinkButton onClick={this.filtroDefault} href="#">Todos</LinkButton>
+                        <LinkButton color='#4D4D59' onClick={this.filtroDefault} href="#">
+                            <Letra color='#41A69C'>T</Letra>
+                            <Letra color='#F2C063'>o</Letra>
+                            <Letra color='#F24141'>d</Letra>
+                            <Letra color='#41A69C'>o</Letra>
+                            <Letra color='#F2C063'>s</Letra>
+                        </LinkButton>
                     </ButtonFiltro>
                     <ButtonFiltro>
-                        <LinkButton onClick={this.filtrarRoupas} href="#">Roupas</LinkButton>
+                        <LinkButton color='#41A69C' onClick={this.filtrarRoupas} href="#">Roupas</LinkButton>
                     </ButtonFiltro>
                     <ButtonFiltro>
-                        <LinkButton onClick={this.filtrarCalcados} href="#">Calcados</LinkButton>
+                        <LinkButton color='#F2C063' onClick={this.filtrarCalcados} href="#">Calcados</LinkButton>
                     </ButtonFiltro>
                     <ButtonFiltro>
-                        <LinkButton onClick={this.filtrarDecoracao} href="#">Decoracao</LinkButton>
+                        <LinkButton color='#F24141' onClick={this.filtrarDecoracao} href="#">Decoracao</LinkButton>
                     </ButtonFiltro>
                     <ButtonFiltro>
-                        <LinkButton onClick={this.filtrarEletronicos} href="#">Eletronicos</LinkButton>
+                        <LinkButton color='#41A69C' onClick={this.filtrarEletronicos} href="#">Eletronicos</LinkButton>
                     </ButtonFiltro>
                 </TabFiltros>
                 <DivProdutos>

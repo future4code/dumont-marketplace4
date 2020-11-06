@@ -3,11 +3,21 @@ import {TextField, Button, InputLabel, Select, FormControl} from '@material-ui/c
 import styled from 'styled-components'
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import axios from 'axios'
-
+import NavBar from './NavBar'
 
 const MainDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    max-height: max-content;
+    min-height: 100vh;
+    background-color:#F2EFE4;
+
+`
+const PostDiv = styled.div`
+    margin: auto;
     width: 70vw;
-    height: 70vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -89,6 +99,11 @@ class PostProduto extends Component {
        
         return ( 
             <MainDiv>
+                 <NavBar 
+                onClickCarrinho={this.props.onClickCarrinho}
+                onClickVender={this.props.onClickVender}
+                />
+                <PostDiv>
 
                 <Title> 
                     <StorefrontIcon fontSize='inherit' color='secondary'/>
@@ -199,6 +214,7 @@ class PostProduto extends Component {
                         <Button onClick={this.props.botaoVoltar} color="primary">Voltar</Button>
                         <Button  onClick={this.postarProduto} variant="contained" color="primary">Vender Produto</Button>
                 </ButtonDiv>
+                </PostDiv>
             </MainDiv>
     
          );
