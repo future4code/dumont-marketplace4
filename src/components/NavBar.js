@@ -104,13 +104,16 @@ const useStyles = makeStyles((theme) => ({
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <InputBase
+              <InputBase 
+                onChange = {props.onChangePesquisa}
+                value={props.valorDoInput}
                 placeholder="Busca"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
+                
               />
             </div>
 

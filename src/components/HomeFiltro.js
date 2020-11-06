@@ -69,11 +69,25 @@ class HomeFiltro extends Component {
     state = { 
         todosProdutos: [],
         produtosFiltrados: [],
+        valorDoInput:"",
      }
 
     componentDidMount = ()=>{
         this.pegarProdutos()
     }
+
+    atualizarCardProdutos = (event) => {
+        
+        const  novoArrayProdutosfiltrados = this.state.todosProdutos.filter((produto) => {
+            const name = produto.name
+            return name.includes(event.target.value)
+            })
+        
+        this.setState ({
+            produtosFiltrados: novoArrayProdutosfiltrados,
+        })
+    }
+
     pegarProdutos = ()=>{
         const urlGet = 'https://us-central1-labenu-apis.cloudfunctions.net/fourUsedTwo/products'
 
@@ -173,15 +187,18 @@ class HomeFiltro extends Component {
             localStorage.setItem('itemsCarrinho', JSON.stringify(novoItemsCarrinho))
         }
     }
-
+    
     render() { 
-        
+        console.log (this.state.valorDoInput)
         return (  
             <MainDiv>
                 <NavBar 
                 onClickCarrinho={this.props.onClickCarrinho}
                 onClickVender={this.props.onClickVender}
+                onChangePesquisa={this.atualizarCardProdutos}
+                // valorDoInput= {this.state.valorDoInput}
                 />
+
                 <TabFiltros>
                     <ButtonFiltro>
                         <LinkButton color='#4D4D59' onClick={this.filtroDefault} href="#">
