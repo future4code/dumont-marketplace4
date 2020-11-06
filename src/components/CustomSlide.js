@@ -6,7 +6,6 @@ import styled from 'styled-components'
 const Carousel = styled(Slider)`
 width:100%;
 margin:auto;
-margin-top:40px;
 &:hover{
   outline:none;
   border:none;
@@ -14,12 +13,13 @@ margin-top:40px;
 outline: none;
 border:none;`
 const Imagem = styled.img`
-width:100%;
-height:200px;
+width:100vw;
+height:600px;
 `
 const MainDiv = styled.div`
 height:max-content;
-width:100%;
+width:100vw;
+
 
 `
 
@@ -31,7 +31,7 @@ export default class CustomSlider extends React.Component {
       adaptiveHeight: false,
       arrows: false,
       autoplay: true,
-      autoplaySpeed: 2000,
+      autoplaySpeed: 3000,
       dots: true,
       initialSlide: true,
       virtualList: true
@@ -41,13 +41,13 @@ export default class CustomSlider extends React.Component {
       
         <Carousel { ...settings }>
           <div>
-          <Imagem src="https://picsum.photos/900/201" alt="" srcset=""/>
+          <Imagem src="https://1.bp.blogspot.com/-dQvrXHCdlXg/UE1gJQq_F1I/AAAAAAAACHo/p3HcR4sUl2w/s1600/IMG_1141+v2.JPG" alt="" srcset=""/>
           </div>
           <div>
-            <Imagem src="https://picsum.photos/900/202" alt="" srcset=""/>
+            <Imagem src="https://miro.medium.com/max/6000/1*R_ZBAjns7CL2CxV343WNFQ.jpeg" alt="" srcset=""/>
           </div>
           <div>
-          <Imagem src="https://picsum.photos/900/203" alt="" srcset=""/>
+          <Imagem src="https://i.pinimg.com/originals/90/93/5f/90935f52db5cfc2f77831c4fc9a0d02b.jpg" alt="" srcset=""/>
           </div>
         </Carousel>
       </MainDiv>
