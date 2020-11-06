@@ -98,19 +98,22 @@ const useStyles = makeStyles((theme) => ({
           <Toolbar>
           <Img src={Logo}/>
             <Typography className={classes.title} variant="h6" noWrap>
-            4Used
+              4Used
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <InputBase
+              <InputBase 
+                onChange = {props.onChangePesquisa}
+                value={props.valorDoInput}
                 placeholder="Busca"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
+                
               />
             </div>
 
