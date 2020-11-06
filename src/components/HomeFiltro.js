@@ -199,6 +199,7 @@ class HomeFiltro extends Component {
                 onChangePesquisa={this.atualizarCardProdutos}
                 // valorDoInput= {this.state.valorDoInput}
                 />
+                <CustomSlider/>
                 <TabFiltros>
                     <ButtonFiltro>
                         <LinkButton color='#4D4D59' onClick={this.filtroDefault} href="#">
