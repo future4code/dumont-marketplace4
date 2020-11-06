@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 const Card = styled.div`
     height: max-content;
     width: max-content;
-    border-radius: 5px;
+    border-radius: 3px;
     position: relative;
     box-shadow: 0px 15px 15px rgba(0,0,0,0.2);
     display: flex;
@@ -24,7 +24,7 @@ const DivImagem = styled.div`
 const Imagem = styled.img`
     height: 250px;
     width: 250px;
-    border-radius: 5px;
+    border-radius: 3px;
     z-index: 1;
     cursor: pointer;
     &:hover{
