@@ -77,8 +77,71 @@ export class Cart extends Component {
         this.setState({itemsCarrinho: []})
         alert('Compra Finalizada! Volte Sempre!')
     }
+
+    addQuantity = (id) => {
+        console.log(id)
+        const addItem = this.state.itemsCarrinho.map((item) => {
+            if (id === item[0].id && item.quantidade<item[0].installments) {
+                const newItem = {
+                    ...item,
+                    quantidade: item.quantidade + 1
+                }
+                return newItem
+            } else {
+                alert ("Limite de estoque atingido")
+                return item
+            }
+        })
+        this.setState({itemsCarrinho: addItem})
+    }
+
+    removeQuantity = (id) => {
+    console.log(id)
+    const addItem = this.state.itemsCarrinho.map((item) => {
+        
+        if (id === item[0].id && item.quantidade>1) {
+            const newItem = {
+                ...item,
+                quantidade: item.quantidade - 1
+            }
+            return newItem
+        }
+            return item
+    })
+    this.setState({itemsCarrinho: addItem})
+    }
+
+    removeItem = (id) => {
+        console.log(id)
+        const addItem = this.state.itemsCarrinho.map((item) => {
+            if (id === item[0].id) {
+                const newItem = {
+                    ...item,
+                    quantidade: 0
+                }
+                return newItem
+            }
+            return item
+        })
+        this.setState({itemsCarrinho: addItem})
+    }
+    
     render() {
-       // console.log(this.state.itemsCarrinho)
+
+        const novaListaCarrinho = this.state.itemsCarrinho.filter(item => {
+            if (item.quantidade === 0) {
+                return false
+            } else {
+                return true
+            }
+        })
+       console.log(this.state.itemsCarrinho)
+       
+       let total = novaListaCarrinho.reduce(getTotal, 0);
+       function getTotal(total, item) {
+       return total + (item[0].price * item.quantidade);
+       }
+
       return (
           <MainDiv>
               <NavBar 
@@ -96,13 +159,21 @@ export class Cart extends Component {
                             {/* <BackButton color="primary"><ArrowBackIcon/></BackButton> */}
                         </TitleLine>
 
-                        {this.state.itemsCarrinho && this.state.itemsCarrinho.map(item=>{
-                            return <CartItem/>
+                        {novaListaCarrinho && novaListaCarrinho.map(item=>{
+                            return <CartItem
+                            addQuantity={() => this.addQuantity(item[0].id)}
+                            removeQuantity={() => this.removeQuantity(item[0].id)}
+                            removeItem={() => this.removeItem(item[0].id)}
+                            imgUrl={item[0].photos}
+                            productName={item[0].name}
+                            price={item[0].price}
+                            description={item[0].description}
+                            quantity={item.quantidade}/>
                         })}
 
 
                         <Total>
-                            Valor Total: R${this.props.total || '0,00'}
+                            Valor Total: R${total}
                         </Total>
 
                         <ButtonDiv>

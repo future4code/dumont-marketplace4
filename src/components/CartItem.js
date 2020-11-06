@@ -6,11 +6,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import RemoveIcon from '@material-ui/icons/Remove';
 
 const ItemContainer = styled.div `
-margin: 20px;
+margin-bottom: 20px;
 border: solid 1px;
 display:flex;
 flex-direction: row;
-width:50vw;
+align-items: center;
+/* width:50vw; */
 `
 const MainContainer = styled.div `
 display:flex;
@@ -33,6 +34,8 @@ flex-direction: row;
 justify-content: space-between;
 `
 const ProductImage = styled.img `
+max-width: width auto;
+max-height:33vh;
 `
 const ProductName = styled.h2 `
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
@@ -57,25 +60,50 @@ const UnitPrice = styled.h3 `
 
 
 export class CartItem extends Component {
+
+    sendMinusId = (id) => {
+        this.props.removeQuantity(id)
+    }
+
+    sendPlusId = (id) => {
+        this.props.addQuantity(id)
+    }
+
+    sendRemoveId = (id) => {
+        this.props.removeItem(id)
+    }
+
     render() {
       return (
         <ItemContainer>
-            <ProductImage src="https://picsum.photos/300/200" alt=""/>
+            <ProductImage src={this.props.imgUrl} alt=""/>
             <MainContainer>
                 <ProductLine>
-                    <ProductName>Produto</ProductName>
-                    <RemoveButton color="secondary" aria-label="add"><DeleteIcon/></RemoveButton>
+                    <ProductName>{this.props.productName}</ProductName>
+                    <RemoveButton
+                        color="secondary"
+                        aria-label="add"
+                        onClick={this.sendRemoveId}
+                    ><DeleteIcon/></RemoveButton>
                 </ProductLine>
-                    <ProductDescr>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</ProductDescr>
+                    <ProductDescr>{this.props.description}</ProductDescr>
                 <QuantityValueContainer>
                     <QuantityContainer>
-                        <MinusButton color="primary" aria-label="add"><RemoveIcon/></MinusButton>
-                        <Quantity>2</Quantity>
-                        <PlusButton color="primary" aria-label="add"><AddIcon/></PlusButton>
+                        <MinusButton 
+                            color="primary"
+                            aria-label="add"
+                            onClick={this.sendMinusId}
+                        ><RemoveIcon/></MinusButton>
+                        <Quantity>{this.props.quantity}</Quantity>
+                        <PlusButton
+                            color="primary"
+                            aria-label="add"
+                            onClick={this.sendPlusId}
+                        ><AddIcon/></PlusButton>
 
                     </QuantityContainer>
                     <div>
-                        <UnitPrice>Valor: R$100</UnitPrice>
+                        <UnitPrice>Valor: R${this.props.price}</UnitPrice>
                     </div>
                 </QuantityValueContainer>
             </MainContainer>
