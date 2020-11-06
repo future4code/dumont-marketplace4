@@ -6,6 +6,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import NavBar from './NavBar'
 import {CartItem} from './CartItem'
 
+
 const MainDiv = styled.div`
     display: flex;
     flex-direction: column;
