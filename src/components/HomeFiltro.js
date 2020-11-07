@@ -179,7 +179,11 @@ class HomeFiltro extends Component {
             let novoItemsCarrinho = itemsCarrinho.map(item=>{
                 // se o item ja exite so alteramos sua quantidade
                 if(item[0].id === id){
+                    if (item.quantidade<item[0].installments){
                     item.quantidade ++
+                    } else {
+                        alert("Limite de estoque atingido")
+                    }
                     existe = true
                     this.showInfoImage(id)
                 }

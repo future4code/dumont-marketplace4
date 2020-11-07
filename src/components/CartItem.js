@@ -11,12 +11,12 @@ border: solid 1px;
 display:flex;
 flex-direction: row;
 align-items: center;
-/* width:50vw; */
 `
 const MainContainer = styled.div `
 display:flex;
 flex-direction: column;
 margin: 10px;
+width: 80vw;
 `
 const QuantityValueContainer = styled.div `
 display:flex;
