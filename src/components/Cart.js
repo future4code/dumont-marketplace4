@@ -117,22 +117,24 @@ export class Cart extends Component {
     }
     
     render() {
-    console.log(localStorage)
 
-    const novaListaCarrinho = this.state.itemsCarrinho.filter(item => {
-        if (item.quantidade === 0) {
-            return false
-        } else {
-            return true
+        const novaListaCarrinho = this.state.itemsCarrinho.filter(item => {
+            if (item.quantidade === 0) {
+                return false
+            } else {
+                return true
+            }
+        })
+
+        let totalQuantity = novaListaCarrinho.reduce((total, valor) => total + valor.quantidade, 0)
+        console.log(totalQuantity)
+
+        let total = novaListaCarrinho.reduce(getTotal, 0);
+        function getTotal(total, item) {
+        return total + (item[0].price * item.quantidade);
         }
-    })
 
-       let total = novaListaCarrinho.reduce(getTotal, 0);
-       function getTotal(total, item) {
-       return total + (item[0].price * item.quantidade);
-       }
-
-      return (
+        return (
           <MainDiv>
               <NavBar 
                 onClickCarrinho={this.props.onClickCarrinho}
@@ -171,6 +173,6 @@ export class Cart extends Component {
                     </DivCart>
             </MainContainer>
           </MainDiv>
-      )
+        )
     }
   }
