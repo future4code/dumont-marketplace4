@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Fab , Button} from '@material-ui/core/';
+import {Button} from '@material-ui/core/';
 import styled from 'styled-components'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import NavBar from './NavBar'
 import {CartItem} from './CartItem'
 
@@ -58,8 +57,6 @@ const Total = styled.h2 `
     align-self: flex-end;
     justify-content: flex-end;
 `
-// const BackButton = styled(Fab) `
-// `
 
 export class Cart extends Component {
     state ={
@@ -68,7 +65,6 @@ export class Cart extends Component {
 
     componentDidMount =()=>{
         if(localStorage.getItem('itemsCarrinho')){
-
             this.setState({itemsCarrinho : JSON.parse(localStorage.getItem('itemsCarrinho'))})
         }
     }
@@ -79,40 +75,39 @@ export class Cart extends Component {
     }
 
     addQuantity = (id) => {
-        console.log(id)
         const addItem = this.state.itemsCarrinho.map((item) => {
-            if (id === item[0].id && item.quantidade<item[0].installments) {
+            if (id === item[0].id) {
+                if(item.quantidade<item[0].installments){
                 const newItem = {
                     ...item,
                     quantidade: item.quantidade + 1
                 }
                 return newItem
-            } else {
-                alert ("Limite de estoque atingido")
-                return item
+                } alert ("Limite de estoque atingido")
             }
+                return item
+            
         })
-        this.setState({itemsCarrinho: addItem})
+        localStorage.setItem('itemsCarrinho', JSON.stringify(this.state.itemsCarrinho))
+        this.setState({itemsCarrinho: addItem})        
     }
 
     removeQuantity = (id) => {
-    console.log(id)
-    const addItem = this.state.itemsCarrinho.map((item) => {
-        
-        if (id === item[0].id && item.quantidade>1) {
-            const newItem = {
-                ...item,
-                quantidade: item.quantidade - 1
+        const addItem = this.state.itemsCarrinho.map((item) => {
+            if (id === item[0].id && item.quantidade>1) {
+                const newItem = {
+                    ...item,
+                    quantidade: item.quantidade - 1
+                }
+                return newItem
             }
-            return newItem
-        }
-            return item
-    })
-    this.setState({itemsCarrinho: addItem})
+                return item
+        })
+        this.setState({itemsCarrinho: addItem})
+        localStorage.setItem('itemsCarrinho', JSON.stringify(this.state.itemsCarrinho))
     }
 
     removeItem = (id) => {
-        console.log(id)
         const addItem = this.state.itemsCarrinho.map((item) => {
             if (id === item[0].id) {
                 const newItem = {
@@ -124,19 +119,22 @@ export class Cart extends Component {
             return item
         })
         this.setState({itemsCarrinho: addItem})
+
+        localStorage.setItem('itemsCarrinho', JSON.stringify(this.state.itemsCarrinho))
+        // this.setState({itemsCarrinho: novaListaCarrinho})   
     }
     
     render() {
+    console.log(localStorage)
 
-        const novaListaCarrinho = this.state.itemsCarrinho.filter(item => {
-            if (item.quantidade === 0) {
-                return false
-            } else {
-                return true
-            }
-        })
-       console.log(this.state.itemsCarrinho)
-       
+    const novaListaCarrinho = this.state.itemsCarrinho.filter(item => {
+        if (item.quantidade === 0) {
+            return false
+        } else {
+            return true
+        }
+    })
+
        let total = novaListaCarrinho.reduce(getTotal, 0);
        function getTotal(total, item) {
        return total + (item[0].price * item.quantidade);
@@ -156,7 +154,6 @@ export class Cart extends Component {
                                 <ShoppingCartIcon color="secondary"/>
                                 Carrinho
                             </Title>
-                            {/* <BackButton color="primary"><ArrowBackIcon/></BackButton> */}
                         </TitleLine>
 
                         {novaListaCarrinho && novaListaCarrinho.map(item=>{
@@ -170,7 +167,6 @@ export class Cart extends Component {
                             description={item[0].description}
                             quantity={item.quantidade}/>
                         })}
-
 
                         <Total>
                             Valor Total: R${total}
