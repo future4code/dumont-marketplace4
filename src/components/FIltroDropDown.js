@@ -78,7 +78,7 @@ const Div = styled.div `
     position: absolute;
     right: 30px;
     top: 10px;
-    z-index: 3;
+    z-index: 10;
     border-radius: 5px;
     background-color: white;
 `

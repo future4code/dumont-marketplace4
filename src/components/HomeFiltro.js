@@ -251,9 +251,9 @@ class HomeFiltro extends Component {
           }else if (order === 'Maior valor'){
             return produtoB.price - produtoA.price
           }else{
-            if (produtoA.name < produtoB.name){ 
+            if (produtoA.name.toLowerCase() < produtoB.name.toLowerCase()){ 
                 return -1;
-            } else if (produtoA.name >produtoB.name){
+            } else if (produtoA.name.toLowerCase() >produtoB.name.toLowerCase()){
                 return 1;
             } 
             return 0;
