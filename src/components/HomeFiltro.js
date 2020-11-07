@@ -102,6 +102,7 @@ class HomeFiltro extends Component {
 
         axios.get(urlGet).then(response=>{
             const todosProdutos = response.data.products.map(produto=>{
+                
                 return {
                     ...produto,
                     maisInfo: false
@@ -168,7 +169,23 @@ class HomeFiltro extends Component {
         }
     }
 
-    
+    alterarEstoque = (id)=>{
+        const arrayProdutos = this.state.produtosFiltrados.map(produto=>{
+            if(produto.id === id){
+                produto.installments = produto.installments - 1
+            }
+
+            return produto
+        })
+        this.setState({produtosFiltrados: arrayProdutos})
+    }
+
+    continuarComprando = ()=>{
+        
+        if(!window.confirm('Quer Continuar Comprando??')){
+            this.props.onClickCarrinho()
+        }
+    }
 
     adicionarCarrinho = (id)=>{
         if(localStorage.getItem('itemsCarrinho')){
@@ -186,6 +203,9 @@ class HomeFiltro extends Component {
                     }
                     existe = true
                     this.showInfoImage(id)
+                    this.alterarEstoque(id)
+                
+                    this.continuarComprando()
                 }
                 return item
                 
@@ -200,10 +220,12 @@ class HomeFiltro extends Component {
                     quantidade: 1
                 }
                 this.showInfoImage(id)
+                this.alterarEstoque(id)
                 
                 novoItemsCarrinho = [...itemsCarrinho, itemCarrinho]
             }
             localStorage.setItem('itemsCarrinho', JSON.stringify(novoItemsCarrinho))
+            this.continuarComprando()
         }else{
             const produto = this.state.produtosFiltrados.filter(produto=>{
                 return produto.id === id
@@ -213,8 +235,10 @@ class HomeFiltro extends Component {
                 quantidade: 1
             }
             this.showInfoImage(id)
+            this.alterarEstoque(id)
             const novoItemsCarrinho = [itemCarrinho]
             localStorage.setItem('itemsCarrinho', JSON.stringify(novoItemsCarrinho))
+            this.continuarComprando()
         }
     }
     onChangeOrdem = (event)=>{
@@ -298,17 +322,20 @@ class HomeFiltro extends Component {
                     {arrayProdutosFiltadros.map(produto=>{
                         const resto = produto.price % 50
                         const parcela = (produto.price - resto) / 50
-                        
-                        return <CardProduto key={produto.id}
-                        imagem={produto.photos}
-                        preco={produto.price}
-                        descricao={produto.description}
-                        nome={produto.name}
-                        formaPg={produto.paymentMethod}
-                        parcelas={parcela <= 1?'A vista': 'ate ' + parcela + ' X'}
-                        maisInfo={produto.maisInfo}
-                        onClickImagem={()=> this.showInfoImage(produto.id)}
-                        adicionarCarrinho={()=> this.adicionarCarrinho(produto.id)}                        />
+                        if(produto.installments > 0){
+
+                            return <CardProduto key={produto.id}
+                            imagem={produto.photos}
+                            preco={produto.price}
+                            descricao={produto.description}
+                            nome={produto.name}
+                            formaPg={produto.paymentMethod}
+                            parcelas={parcela <= 1?'A vista': 'ate ' + parcela + ' X'}
+                            maisInfo={produto.maisInfo}
+                            onClickImagem={()=> this.showInfoImage(produto.id)}
+                            adicionarCarrinho={()=> this.adicionarCarrinho(produto.id)}                        />
+                        }
+
                     })}
                 </DivProdutos>
             </MainDiv>
