@@ -20,20 +20,20 @@ const ButtonFilter = withStyles({
     padding: '6px 12px',
     border: '1px solid',
     lineHeight: 1.5,
-    backgroundColor: '#3b4caf',
-    borderColor: '#3b4caf',
+    backgroundColor: '#41A69C',
+    borderColor: '#41A69C',
     fontFamily: [
       'Roboto',
     ].join(','),
     '&:hover': {
-      backgroundColor: '#303f9f',
-      borderColor: '#303f9fcc',
+      backgroundColor: '##41A69C',
+      borderColor: '##41A69Ccc',
       boxShadow: 'none',
     },
     '&:active': {
       boxShadow: 'none',
-      backgroundColor: '#0062cc',
-      borderColor: '#005cbf',
+      backgroundColor: '##41A69C',
+      borderColor: '##41A69C',
     },
     '&:focus': {
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
@@ -75,7 +75,21 @@ const Div = styled.div `
     align-items: center;
     border: 1px solid #c4c4c4;
     border-radius: 10px;
-    padding: 10px 0;
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    z-index: 3;
+    border-radius: 5px;
+    background-color: white;
+`
+const DivInputs = styled.div`
+  
+  background-color: white;
+  height: max-content;
+  width: 100%;
+  display: ${props=> props.display === true? 'block': 'none'};
+  margin-top: 20px;
+  border-radius: 5px;
 `
 const DivSeletor = styled.div `
     align-self: flex-start;
@@ -84,25 +98,27 @@ const DivSeletor = styled.div `
 `
 const DivTitle= styled.div `
     display: flex;
-    color: white;
-    background-color:#3b4caf;
+    color: black;
+    background-color:#41A69C;
+    border-radius: 5px;
     width: 231px;
     padding: 10px;
     margin: -11px auto;
     justify-content: baseline;
     align-items: center;
-    font-weight: bold;
     font-size: 1.2em;
 `
 const ButtonClose = styled.button `
-    background-color: #3b4caf;
+    background-color: #41A69C;
     border: none;
+    outline: none;
     color: white;
     font-size: 1.6em;
     align-self: flex-start;
     margin-right: 10px;
     cursor: pointer;
     :hover{
+      
         outline: none;
         border: none;
         box-shadow: none;
@@ -110,9 +126,18 @@ const ButtonClose = styled.button `
         
     }
 `
+const TextoFiltro = styled.p`
+  cursor: pointer;
+  font-size: 20px;
+  width: 70%;
+  height: max-content;
+  margin-top: 4px;
+  margin-bottom: 0px;
+`
 
 function FiltroDropDown (props){
-
+  
+  
     const classes = useStyles();
     const classes2 = useStyles2();
     const classes3 = useStyles3();
@@ -122,13 +147,14 @@ function FiltroDropDown (props){
       setValue(event.target.value);
     };
     
-    return ( <form className={classes.root} noValidate autoComplete="off">
+    return ( 
     <Div>
-        <DivTitle>
-            <ButtonClose>x</ButtonClose>
-            Filtros
+        <DivTitle >
+            <ButtonClose onClick={props.mudaDisplayNone}>x</ButtonClose>
+            <TextoFiltro onClick={props.mudaDisplayBlock}>Filtros</TextoFiltro>
         </DivTitle>
-        
+        <DivInputs display={props.display}>
+
         <TextField value={props.nome} onChange={props.valorNome}id="outlined-search" label="Nome" type="text" variant="outlined" />
         <form className={classes2.root} noValidate autoComplete="off">
             <TextField value={props.minimo} onChange={props.valorMin}id="outlined-search" label="min." type="number" variant="outlined" />
@@ -147,9 +173,10 @@ function FiltroDropDown (props){
 
         <form className={classes3.root} noValidate autoComplete="off">
         </form>
+        </DivInputs>
     </Div>
     
-  </form>
+ 
 
     )
 }

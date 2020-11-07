@@ -12,6 +12,7 @@ const TabFiltros = styled.ul`
     justify-content: flex-start;
     list-style: none;
     border-bottom: 1px solid grey;
+    position: relative;
 `
 const MainDiv = styled.div`
     display: flex;
@@ -76,6 +77,7 @@ class HomeFiltro extends Component {
         valorMax: Infinity,
         valorNome: "",
         valorOrdenacao: "",
+        displayFiltro : false
 
      }
 
@@ -233,6 +235,7 @@ class HomeFiltro extends Component {
       }
     
     render() { 
+        console.log(this.state.displayFiltro)
         let arrayProdutosFiltadros = this.state.produtosFiltrados.filter((produto)=>{
             const valorMaximo= this.state.valorMax === ''? Infinity: this.state.valorMax
               if(produto.price < this.state.valorMin || produto.price > valorMaximo){
@@ -252,13 +255,7 @@ class HomeFiltro extends Component {
                 onChangePesquisa={this.atualizarCardProdutos}
                 // valorDoInput= {this.state.valorDoInput}
                 />
-                {/* <FiltroDropDown
-                 valorNome={this.atualizarCardProdutos}
-                 valorMin={event => this.setState({valorMin: event.target.value})}
-                 minimo={this.state.valorMin}
-                 valorMax={event => this.setState({valorMax: event.target.value})}
-                 maximo={this.state.valorMax}
-                 ordenacao={this.onChangeOrdem}/> */}
+                
                 <CustomSlider/>
                 <TabFiltros>
                     <ButtonFiltro>
@@ -282,6 +279,16 @@ class HomeFiltro extends Component {
                     <ButtonFiltro>
                         <LinkButton color='#41A69C' onClick={this.filtrarEletronicos} href="#">Eletronicos</LinkButton>
                     </ButtonFiltro>
+                    <FiltroDropDown
+                    display={this.state.displayFiltro}
+                    mudaDisplayNone={()=>this.setState({displayFiltro: false})}
+                    mudaDisplayBlock={()=>this.setState({displayFiltro: true})}
+                 valorNome={this.atualizarCardProdutos}
+                 valorMin={event => this.setState({valorMin: event.target.value})}
+                 minimo={this.state.valorMin}
+                 valorMax={event => this.setState({valorMax: event.target.value})}
+                 maximo={this.state.valorMax}
+                 ordenacao={this.onChangeOrdem}/>
                 </TabFiltros>
                 <DivProdutos>
                     {arrayProdutosFiltadros.map(produto=>{
