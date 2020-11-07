@@ -12,9 +12,7 @@ const MainDiv = styled.div`
     width: 100vw;
     max-height: max-content;
     min-height: 100vh;
-    
     background-color:#F2EFE4;
-
 `
 const ButtonDiv = styled.div`
     display: flex;
@@ -22,7 +20,6 @@ const ButtonDiv = styled.div`
     justify-content: flex-end;
     width: 100%;
     height: max-content;
-    
 `
 const MainContainer = styled.div `
     margin:auto;
@@ -33,14 +30,11 @@ const MainContainer = styled.div `
     display: flex;
     flex-direction: column;
 `
-
 const DivCart = styled(MainContainer)`
     width: 100%;
     padding: none;
     height: max-content;
-
 `
-
 const TitleLine = styled.div `
     display:flex;
     align-items: center;
@@ -88,8 +82,8 @@ export class Cart extends Component {
                 return item
             
         })
-        localStorage.setItem('itemsCarrinho', JSON.stringify(this.state.itemsCarrinho))
-        this.setState({itemsCarrinho: addItem})        
+        this.setState({itemsCarrinho: addItem})
+        localStorage.setItem('itemsCarrinho', JSON.stringify(addItem))        
     }
 
     removeQuantity = (id) => {
@@ -104,7 +98,7 @@ export class Cart extends Component {
                 return item
         })
         this.setState({itemsCarrinho: addItem})
-        localStorage.setItem('itemsCarrinho', JSON.stringify(this.state.itemsCarrinho))
+        localStorage.setItem('itemsCarrinho', JSON.stringify(addItem))
     }
 
     removeItem = (id) => {
@@ -119,9 +113,7 @@ export class Cart extends Component {
             return item
         })
         this.setState({itemsCarrinho: addItem})
-
-        localStorage.setItem('itemsCarrinho', JSON.stringify(this.state.itemsCarrinho))
-        // this.setState({itemsCarrinho: novaListaCarrinho})   
+        localStorage.setItem('itemsCarrinho', JSON.stringify(addItem))
     }
     
     render() {
