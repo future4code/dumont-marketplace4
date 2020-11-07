@@ -99,7 +99,6 @@ class HomeFiltro extends Component {
 
     pegarProdutos = ()=>{
         const urlGet = 'https://us-central1-labenu-apis.cloudfunctions.net/fourUsedTwo/products'
-
         axios.get(urlGet).then(response=>{
             const todosProdutos = response.data.products.map(produto=>{
                 
@@ -108,13 +107,14 @@ class HomeFiltro extends Component {
                     maisInfo: false
                 }
             })
-        
+            
             this.setState({todosProdutos: todosProdutos, produtosFiltrados: todosProdutos})
         }).catch(error=>{
             console.log(error.message)
         })
+        
     }
-
+    
     filtroDefault = () =>{
         this.pegarProdutos()
     }

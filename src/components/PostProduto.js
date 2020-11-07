@@ -68,6 +68,42 @@ class PostProduto extends Component {
         valorFormaPg:'',
         valorCategoria:''
      }
+     
+     postarFromAmazon = ()=>{
+        const options = {
+            method: 'GET',
+            url: 'https://amazon-products1.p.rapidapi.com/offers',
+            params: {min_number: '5', country: 'US', type: 'LIGHTNING_DEAL', max_number: '100'},
+            headers: {
+              'x-rapidapi-key': '6cce7892e0msh9fb1184908cb4cfp1e7b3ajsncaee060e1a34',
+              'x-rapidapi-host': 'amazon-products1.p.rapidapi.com'
+            }
+          };
+          
+          axios.request(options).then(function (response) {
+            const array = response.data.offers.map(produto=>{
+                const urlPost = 'https://us-central1-labenu-apis.cloudfunctions.net/fourUsedTwo/products'
+                const body = {
+                    name: produto.brand,
+                    description: produto.description,
+                    price: produto.prices.current_price,
+                    paymentMethod: 'Cartao',
+                    category: produto.category,
+                    photos: [produto.images[0]],
+                    installments:1
+                }
+        axios.post(urlPost, body).then(response=>{
+            alert('Seu produto ja esta disponivel na nossa vitrine!')
+        }).catch(error=>{
+            console.log(error.message)
+        })
+    })
+      
+      console.log(response.data.offers);
+    }).catch(function (error) {
+      console.error(error);
+    });
+    }
 
      postarProduto = ()=>{
         const urlPost = 'https://us-central1-labenu-apis.cloudfunctions.net/fourUsedTwo/products'
